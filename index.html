@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon | Under Management</title>
+<style>
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    color: #263445;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+header {
+    background: #fff;
+    border-bottom: 1px solid #e1e5eb;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logo {
+    font-size: 17px;
+    font-weight: 700;
+    color: #17365d;
+    letter-spacing: 0.5px;
+}
+
+
+.header-status {
+    font-size: 11px;
+    color: #b7791f;
+    background: #fff8e6;
+    padding: 7px 12px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 18px;
+}
+
+
+.container {
+    background: #fff;
+    max-width: 550px;
+    width: 100%;
+    text-align: center;
+    padding: 55px 35px;
+    border: 1px solid #e5e9ef;
+    border-radius: 5px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+}
+
+
+.icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #edf3fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 28px;
+}
+
+
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #2463a5;
+    background: #edf5ff;
+    padding: 8px 14px;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+h1 {
+    font-size: 30px;
+    color: #17365d;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+
+.description {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+
+.loader {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 25px 0;
+}
+
+
+.loader span {
+    width: 8px;
+    height: 8px;
+    background: #2766a5;
+    border-radius: 50%;
+    animation: waiting 1.2s infinite ease-in-out;
+}
+
+
+.loader span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+
+.loader span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes waiting {
+    0%, 80%, 100% {
+        opacity: 0.3;
+        transform: scale(0.7);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+.waiting-text {
+    font-size: 12px;
+    color: #718096;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+
+.divider {
+    height: 1px;
+    background: #edf0f4;
+    margin: 30px 0;
+}
+
+
+.clock-label {
+    font-size: 11px;
+    color: #8994a3;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+
+.clock {
+    font-size: 27px;
+    color: #17365d;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+
+.date {
+    font-size: 12px;
+    color: #8994a3;
+    margin-top: 7px;
+}
+
+
+footer {
+    background: #fff;
+    border-top: 1px solid #e1e5eb;
+    text-align: center;
+    padding: 18px;
+    color: #8994a3;
+    font-size: 11px;
+}
+
+
+@media(max-width: 480px) {
+    header {
+        padding: 16px 5%;
+    }
+
+
+    .container {
+        padding: 45px 20px;
+    }
+
+
+    h1 {
+        font-size: 25px;
+    }
+
+
+    .clock {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo">DJ Esports 2017</div>
+    <div class="header-status">● UNDER MANAGEMENT</div>
+</header>
+<main>
+    <div class="container">
+    <div class="icon">⚙</div>
+
+
+    <div class="badge">COMING SOON</div>
+
+
+    <h1>Under Management</h1>
+
+
+    <p class="description">
+        We are currently working on improving our platform.
+        Our website will be available soon.
+        Thank you for your patience and understanding.
+    </p>
+
+
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <div class="waiting-text">PLEASE WAIT...</div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="clock-label">CURRENT INDIAN STANDARD TIME</div>
+
+
+    <div class="clock" id="clock">00:00:00</div>
+
+
+    <div class="date" id="date">Loading date...</div>
+
+
+</div>
+</main>
+<footer>
+    © <span id="year"></span> All Rights Reserved.
+    | Website Under Management
+</footer>
+<script>
+function updateTime() {
+
+
+    const now = new Date();
+
+
+    const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+
+
+    const dateOptions = {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    };
+
+
+    document.getElementById('clock').textContent =
+        new Intl.DateTimeFormat('en-IN', options).format(now);
+
+
+    document.getElementById('date').textContent =
+        new Intl.DateTimeFormat('en-IN', dateOptions).format(now);
+
+
+    document.getElementById('year').textContent =
+        new Intl.DateTimeFormat('en-IN', {
+            timeZone: 'Asia/Kolkata',
+            year: 'numeric'
+        }).format(now);
+}
+
+
+updateTime();
+setInterval(updateTime, 1000);
+</script>
+</body>
+</html>
