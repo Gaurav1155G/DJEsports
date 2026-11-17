@@ -3,392 +3,510 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f4f7fb">
-<title>Tournament Slot Registration</title>
+<meta name="theme-color" content="#f5f8fc">
+<title>DJ ESPORTS 2017 | Tournament Registration</title>
 
 <style>
-:root {
-  --primary:#16a36a;
-  --primary-dark:#087e50;
-  --bg:#f4f7fb;
-  --white:#ffffff;
-  --text:#172b24;
-  --muted:#78877f;
+:root{
+  --green:#13a66b;
+  --dark:#087c4d;
+  --bg:#f3f7f5;
+  --text:#172a22;
+  --muted:#77877e;
   --border:#e5ece8;
+  --white:#fff;
 }
 
-* {
+*{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
 }
 
-body {
+body{
   background:
-    radial-gradient(circle at top right,#e3f9ed 0,transparent 35%),
-    var(--bg);
+    radial-gradient(circle at top right,#dcf9e9,transparent 35%),
+    #f3f7f5;
   color:var(--text);
-  padding:25px 14px;
   min-height:100vh;
+  padding:20px 13px 35px;
 }
 
-.container {
-  max-width:510px;
+.container{
+  max-width:480px;
   margin:auto;
 }
 
-.top-header {
+.header{
   text-align:center;
-  margin-bottom:23px;
+  padding:15px 0 24px;
 }
 
-.logo {
-  width:62px;
-  height:62px;
-  margin:0 auto 13px;
-  background:linear-gradient(135deg,#20bd7c,#087e50);
+.logo{
+  width:65px;
+  height:65px;
+  border-radius:21px;
+  background:linear-gradient(145deg,#20c982,#087c4d);
+  display:grid;
+  place-items:center;
   color:white;
-  border-radius:19px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  box-shadow:0 9px 20px #16a36a35;
+  font-size:31px;
+  margin:auto auto 13px;
+  box-shadow:0 10px 25px #13a66b35;
 }
 
-.badges {
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-bottom:13px;
-}
-
-.badge {
-  background:#e4f8ee;
+.tag{
+  display:inline-block;
+  background:#e2f8ec;
   color:#07834f;
-  border-radius:30px;
-  padding:7px 12px;
   font-size:10px;
-  font-weight:800;
-  letter-spacing:.4px;
-}
-
-.top-header h1 {
-  font-size:27px;
-  font-weight:850;
-  letter-spacing:-.8px;
-}
-
-.top-header p {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:7px;
-  line-height:1.6;
-}
-
-.main-card {
-  background:white;
-  border:1px solid var(--border);
-  border-radius:23px;
-  padding:22px 19px;
-  box-shadow:0 12px 40px #183d2910;
-}
-
-.slots-box {
-  background:linear-gradient(135deg,#edfff5,#f5fbf8);
-  border:1px solid #d8f2e3;
-  padding:16px;
-  border-radius:16px;
-  margin-bottom:23px;
-}
-
-.slots-heading {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  font-weight:900;
+  padding:7px 13px;
+  border-radius:30px;
+  letter-spacing:1px;
   margin-bottom:12px;
 }
 
-.slots-heading strong {
-  font-size:13px;
+.header h1{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-1px;
 }
 
-.slots-heading span {
-  font-size:11px;
-  color:var(--primary-dark);
+.header p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+  line-height:1.6;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:23px;
+  padding:21px 18px;
+  box-shadow:0 12px 40px #183d2910;
+}
+
+.progress{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:24px;
+  gap:5px;
+}
+
+.progress-item{
+  flex:1;
+  text-align:center;
+  font-size:10px;
+  color:#98a59d;
   font-weight:800;
 }
 
-.slots-grid {
+.progress-item span{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  margin:0 auto 6px;
+  border-radius:50%;
+  background:#edf1ee;
+  color:#78877e;
+}
+
+.progress-item.active{
+  color:var(--green);
+}
+
+.progress-item.active span,
+.progress-item.done span{
+  background:#dff8ea;
+  color:#078c53;
+}
+
+.progress-item.done{
+  color:#078c53;
+}
+
+.progress-line{
+  height:2px;
+  flex:.4;
+  background:#e6eee9;
+  margin-top:-17px;
+}
+
+.screen{
+  display:none;
+  animation:fade .3s ease;
+}
+
+.screen.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(9px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.section-title{
+  font-size:19px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+
+.section-desc{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.slots-box{
+  padding:15px;
+  background:#edfff4;
+  border:1px solid #d9f3e4;
+  border-radius:15px;
+  margin-bottom:23px;
+}
+
+.slots-heading{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:13px;
+}
+
+.slots-heading span{
+  color:var(--green);
+}
+
+.slots-grid{
   display:grid;
   grid-template-columns:repeat(25,1fr);
   gap:4px;
 }
 
-.slot-bar {
+.slot-bar{
   height:9px;
-  background:#22b979;
   border-radius:5px;
+  background:#25bd79;
 }
 
-.slots-note {
+.slots-note{
   font-size:10px;
-  color:#72887c;
+  color:#718579;
   margin-top:10px;
 }
 
-.section-title {
-  font-size:15px;
-  font-weight:800;
-  margin:21px 0 13px;
-  display:flex;
-  align-items:center;
-  gap:9px;
+.field{
+  margin-bottom:16px;
 }
 
-.section-number {
-  width:25px;
-  height:25px;
-  background:#e7f8ef;
-  color:#0c985d;
-  border-radius:8px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-}
-
-.form-group {
-  margin-bottom:15px;
-}
-
-label {
+label{
   display:block;
-  font-size:12px;
-  font-weight:750;
-  margin-bottom:7px;
-  color:#34483d;
+  font-size:11px;
+  font-weight:850;
+  color:#42544a;
+  margin-bottom:8px;
+  letter-spacing:.3px;
 }
 
-input {
+input{
   width:100%;
-  height:48px;
-  padding:0 14px;
-  border:1px solid #e0e9e4;
-  border-radius:11px;
-  background:#fbfdfc;
-  color:#172b24;
+  height:49px;
+  border:1px solid #e2eae5;
+  background:#fafcfb;
+  border-radius:12px;
+  padding:0 13px;
   font-size:13px;
   outline:none;
+  color:#172a22;
   transition:.2s;
 }
 
-input::placeholder {
-  color:#a2aea7;
-}
-
-input:focus {
-  border-color:#20b979;
+input:focus{
+  border-color:var(--green);
   background:white;
-  box-shadow:0 0 0 3px #20b97918;
+  box-shadow:0 0 0 3px #13a66b15;
 }
 
-.players-grid {
+input::placeholder{
+  color:#a3aea7;
+}
+
+.players{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:11px;
 }
 
-.player-input {
+.player{
   position:relative;
 }
 
-.player-input input {
+.player input{
   padding-left:42px;
 }
 
-.player-number {
+.player b{
   position:absolute;
-  left:12px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#159b62;
+  left:13px;
+  top:17px;
+  color:var(--green);
+  font-size:12px;
+}
+
+.info-box{
+  padding:13px;
+  background:#f5f9f7;
+  border-radius:12px;
+  color:#63756a;
   font-size:11px;
-  font-weight:900;
+  line-height:1.7;
+  margin:18px 0;
 }
 
-/* PAYMENT QR */
-
-.qr-section {
-  background:#f8fbf9;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:19px 12px;
-  text-align:center;
-  margin-top:23px;
-}
-
-.qr-icon {
-  font-size:26px;
-  margin-bottom:7px;
-}
-
-.qr-section h3 {
-  font-size:16px;
-  margin-bottom:5px;
-}
-
-.qr-section p {
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6;
-}
-
-.qr-wrapper {
-  background:white;
-  padding:10px;
-  display:inline-block;
-  border:1px solid #e7ece9;
-  border-radius:13px;
-  margin:15px 0 10px;
-  box-shadow:0 5px 16px #00000008;
-}
-
-.qr-wrapper img {
-  display:block;
-  width:210px;
-  height:210px;
-  object-fit:contain;
-}
-
-.qr-note {
-  color:#a16b13;
-  background:#fff8e8;
-  padding:10px;
-  border-radius:9px;
-  font-size:10px;
-  margin-top:12px;
-  line-height:1.6;
-}
-
-/* BUTTON */
-
-.btn-submit {
+.btn{
   width:100%;
-  height:53px;
-  margin-top:20px;
+  min-height:52px;
   border:0;
   border-radius:13px;
-  background:linear-gradient(135deg,#20b979,#078550);
+  background:linear-gradient(135deg,#20be7a,#07834f);
   color:white;
-  font-size:15px;
-  font-weight:850;
+  font-size:14px;
+  font-weight:900;
   cursor:pointer;
-  box-shadow:0 8px 18px #16a36a30;
+  box-shadow:0 8px 18px #13a66b25;
   transition:.2s;
 }
 
-.btn-submit:active {
+.btn:active{
   transform:scale(.98);
 }
 
-.footer-note {
+.btn:disabled{
+  background:#b9c9c0;
+  box-shadow:none;
+  cursor:not-allowed;
+  color:#fff;
+}
+
+.btn-back{
+  background:#eff4f1;
+  color:#56685e;
+  box-shadow:none;
+  margin-top:10px;
+}
+
+.payment-card{
+  background:#f6faf8;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:18px 12px;
   text-align:center;
+}
+
+.payment-icon{
+  font-size:29px;
+  margin-bottom:9px;
+}
+
+.payment-card h3{
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.payment-card p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+}
+
+.qr-wrapper{
+  display:inline-block;
+  padding:11px;
+  background:white;
+  border:1px solid #e5ebe7;
+  border-radius:15px;
+  margin:16px 0 10px;
+  box-shadow:0 5px 18px #00000008;
+}
+
+.qr-wrapper img{
+  display:block;
+  width:215px;
+  height:215px;
+  object-fit:contain;
+}
+
+.qr-instruction{
+  font-size:11px;
+  color:#53675b;
+  line-height:1.7;
+  margin-top:9px;
+}
+
+.warning{
+  background:#fff8e9;
+  border:1px solid #f5e7c7;
+  border-radius:11px;
+  padding:12px;
   font-size:10px;
-  color:#9aa79f;
+  color:#95651b;
+  text-align:left;
+  line-height:1.7;
   margin-top:15px;
 }
 
-/* POPUP */
+.payment-check{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  background:#edfff4;
+  border:1px solid #cdeedb;
+  padding:15px;
+  border-radius:13px;
+  margin:17px 0;
+  text-align:left;
+  cursor:pointer;
+}
 
-.modal-overlay {
+.payment-check input{
+  width:21px;
+  height:21px;
+  min-width:21px;
+  accent-color:#0b9b5d;
+  margin-top:1px;
+}
+
+.payment-check strong{
+  display:block;
+  font-size:12px;
+  color:#17623e;
+  margin-bottom:4px;
+}
+
+.payment-check small{
+  display:block;
+  color:#6a8274;
+  font-size:10px;
+  line-height:1.6;
+}
+
+.status{
+  text-align:center;
+  font-size:11px;
+  color:#a16b13;
+  background:#fff8e9;
+  border-radius:10px;
+  padding:11px;
+  margin-bottom:15px;
+}
+
+.status.ready{
+  color:#087c4d;
+  background:#e8f9ef;
+}
+
+.summary{
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  margin:18px 0;
+}
+
+.summary-head{
+  background:#f1faf5;
+  padding:13px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border-top:1px solid var(--border);
+  font-size:11px;
+}
+
+.summary-row span:first-child{
+  color:var(--muted);
+}
+
+.summary-row strong{
+  text-align:right;
+  word-break:break-word;
+}
+
+.footer{
+  text-align:center;
+  color:#9aa79f;
+  font-size:10px;
+  margin-top:16px;
+  line-height:1.7;
+}
+
+.modal-overlay{
   position:fixed;
   inset:0;
-  background:#10251bd1;
-  backdrop-filter:blur(5px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:17px;
   z-index:100;
-}
-
-.modal-overlay.active {
-  display:flex;
-}
-
-.modal-card {
-  width:100%;
-  max-width:390px;
-  background:white;
-  border-radius:23px;
-  padding:27px 21px;
-  text-align:center;
-  animation:show .25s ease;
-}
-
-@keyframes show {
-  from {transform:scale(.92);opacity:0}
-  to {transform:scale(1);opacity:1}
-}
-
-.check-circle {
-  width:65px;
-  height:65px;
-  background:#e5f9ee;
-  color:#10a464;
-  border-radius:50%;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
-  font-size:34px;
-  margin:0 auto 16px;
+  padding:16px;
+  background:#10251bd9;
+  backdrop-filter:blur(5px);
 }
 
-.modal-card h2 {
-  font-size:21px;
+.modal-overlay.active{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:380px;
+  background:white;
+  padding:25px 20px;
+  border-radius:22px;
+  text-align:center;
+}
+
+.modal-icon{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:#e4f9ed;
+  display:grid;
+  place-items:center;
+  color:#0b9b5d;
+  font-size:30px;
+  margin:0 auto 14px;
+}
+
+.modal h2{
+  font-size:20px;
   margin-bottom:10px;
 }
 
-.modal-card p {
-  font-size:13px;
-  color:#728078;
-  line-height:1.8;
-  margin-bottom:19px;
-}
-
-.modal-card strong {
-  color:#078550;
-}
-
-.btn-ok {
-  width:100%;
-  height:49px;
-  border:0;
-  border-radius:12px;
-  background:#10a464;
-  color:white;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.cancel-btn {
-  margin-top:12px;
-  background:none;
-  border:0;
-  color:#839087;
+.modal p{
   font-size:12px;
-  cursor:pointer;
+  line-height:1.8;
+  color:#74847a;
+  margin-bottom:18px;
 }
 
-@media(max-width:380px) {
-  .main-card {padding:17px 13px}
-  .top-header h1 {font-size:24px}
-  .players-grid {gap:8px}
-  .slots-grid {gap:2px}
-  .qr-wrapper img {width:190px;height:190px}
+@media(max-width:380px){
+  .card{padding:17px 13px}
+  .header h1{font-size:25px}
+  .qr-wrapper img{width:190px;height:190px}
+  .slots-grid{gap:2px}
 }
 </style>
 </head>
@@ -397,302 +515,441 @@ input:focus {
 
 <div class="container">
 
-  <header class="top-header">
+<header class="header">
+  <div class="logo">🏆</div>
+  <div class="tag">25 TEAM SLOTS · 4 PLAYERS</div>
+  <h1>DJ ESPORTS 2017</h1>
+  <p>Register your squad and secure your tournament place.</p>
+</header>
 
-    <div class="logo">🏆</div>
+<main class="card">
 
-    <div class="badges">
-      <span class="badge">25 TEAM SLOTS</span>
-      <span class="badge">4 PLAYERS / TEAM</span>
-    </div>
-
-    <h1>DJ ESPORTS 2017</h1>
-
-    <p>
-      Register your squad and secure your place<br>
-      in the upcoming tournament.
-    </p>
-
-  </header>
-
-  <main class="main-card">
-
-    <div class="slots-box">
-
-      <div class="slots-heading">
-        <strong>🏆 Tournament Capacity</strong>
-        <span>25 Total Slots</span>
-      </div>
-
-      <div class="slots-grid" id="slotsGrid"></div>
-
-      <div class="slots-note">
-        Registration capacity: 25 teams · 4 players per squad
-      </div>
-
-    </div>
-
-    <form id="registrationForm">
-
-      <div class="section-title">
-        <span class="section-number">01</span>
-        Team Information
-      </div>
-
-      <div class="form-group">
-        <label for="teamName">TEAM NAME *</label>
-        <input id="teamName" type="text"
-          placeholder="Enter your squad name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="whatsappNumber">CAPTAIN WHATSAPP NUMBER *</label>
-        <input id="whatsappNumber" type="tel"
-          inputmode="numeric"
-          placeholder="Enter 10-digit mobile number"
-          maxlength="10" pattern="[0-9]{10}" required>
-      </div>
-
-      <div class="section-title">
-        <span class="section-number">02</span>
-        Squad Roster
-      </div>
-
-      <div class="players-grid">
-
-        <div class="player-input">
-          <span class="player-number">01</span>
-          <input id="player1" type="text"
-            placeholder="Player 1 (IGL)" required>
-        </div>
-
-        <div class="player-input">
-          <span class="player-number">02</span>
-          <input id="player2" type="text"
-            placeholder="Player 2" required>
-        </div>
-
-        <div class="player-input">
-          <span class="player-number">03</span>
-          <input id="player3" type="text"
-            placeholder="Player 3" required>
-        </div>
-
-        <div class="player-input">
-          <span class="player-number">04</span>
-          <input id="player4" type="text"
-            placeholder="Player 4" required>
-        </div>
-
-      </div>
-
-      <div class="section-title">
-        <span class="section-number">03</span>
-        Entry Fee Payment
-      </div>
-
-      <div class="qr-section">
-
-        <div class="qr-icon">💳</div>
-
-        <h3>Scan & Pay Entry Fee</h3>
-
-        <p>
-          Complete your payment using PhonePe,<br>
-          Google Pay or Paytm.
-        </p>
-
-        <div class="qr-wrapper">
-          <img
-            src="https://pvtbro.carrd.co/assets/images/image01.jpg?v=efe9faee"
-            alt="Tournament Payment QR Code"
-            loading="eager">
-        </div>
-
-        <p>
-          Scan the QR code using any supported UPI application.
-        </p>
-
-        <div class="qr-note">
-          ⚠️ After completing payment, keep your transaction
-          screenshot ready to attach in WhatsApp.
-          Do not share your UPI PIN or OTP.
-        </div>
-
-      </div>
-
-      <button class="btn-submit" type="submit">
-        BOOK MY TEAM SLOT →
-      </button>
-
-      <div class="footer-note">
-        Registration details will be sent directly to tournament admin.
-      </div>
-
-    </form>
-
-  </main>
+<div class="progress">
+  <div class="progress-item active" id="step1">
+    <span>1</span>Details
+  </div>
+  <div class="progress-line"></div>
+  <div class="progress-item" id="step2">
+    <span>2</span>Payment
+  </div>
+  <div class="progress-line"></div>
+  <div class="progress-item" id="step3">
+    <span>3</span>Booking
+  </div>
 </div>
 
-<!-- CONFIRMATION POPUP -->
+<!-- SCREEN 1 -->
 
-<div class="modal-overlay" id="confirmationModal">
+<section class="screen active" id="detailsScreen">
 
-  <div class="modal-card">
+<h2 class="section-title">Team Registration</h2>
+<p class="section-desc">
+Enter your complete squad information to continue.
+</p>
 
-    <div class="check-circle">✓</div>
-
-    <h2>Registration Details Ready!</h2>
-
-    <p>
-      Your team registration details have been prepared successfully.
-
-      <br><br>
-
-      Click below to open WhatsApp and send your complete
-      registration directly to the tournament administration.
-
-      <br><br>
-
-      Please attach your payment screenshot in the WhatsApp chat.
-
-      <br><br>
-
-      <strong>
-        Your slot will be confirmed only after payment
-        verification and official slot number confirmation.
-      </strong>
-    </p>
-
-    <button class="btn-ok" id="okBtn">
-      SEND DETAILS ON WHATSAPP →
-    </button>
-
-    <button class="cancel-btn" id="cancelBtn">
-      Go Back
-    </button>
-
+<div class="slots-box">
+  <div class="slots-heading">
+    <strong>🏆 Tournament Capacity</strong>
+    <span>25 Slots</span>
   </div>
+  <div class="slots-grid" id="slotsGrid"></div>
+  <div class="slots-note">25 Teams · 4 Players Per Team</div>
+</div>
 
+<form id="registrationForm">
+
+<div class="field">
+  <label>TEAM NAME *</label>
+  <input id="teamName" placeholder="Enter your squad name" required>
+</div>
+
+<div class="field">
+  <label>CAPTAIN WHATSAPP NUMBER *</label>
+  <input id="whatsappNumber" type="tel"
+    inputmode="numeric" maxlength="10"
+    pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+</div>
+
+<label style="margin-bottom:11px">SQUAD ROSTER *</label>
+
+<div class="players">
+  <div class="player">
+    <b>01</b>
+    <input id="player1" placeholder="Player 1 (IGL)" required>
+  </div>
+  <div class="player">
+    <b>02</b>
+    <input id="player2" placeholder="Player 2" required>
+  </div>
+  <div class="player">
+    <b>03</b>
+    <input id="player3" placeholder="Player 3" required>
+  </div>
+  <div class="player">
+    <b>04</b>
+    <input id="player4" placeholder="Player 4" required>
+  </div>
+</div>
+
+<div class="info-box">
+  ℹ️ Please check all player names and contact details carefully before proceeding.
+</div>
+
+<button class="btn" type="submit">
+  CONTINUE TO PAYMENT →
+</button>
+
+</form>
+</section>
+
+<!-- SCREEN 2 -->
+
+<section class="screen" id="paymentScreen">
+
+<h2 class="section-title">Entry Fee Payment</h2>
+<p class="section-desc">
+Complete your entry fee payment using the QR code below.
+</p>
+
+<div class="payment-card">
+
+<div class="payment-icon">💳</div>
+<h3>Scan & Pay</h3>
+<p>Use PhonePe, Google Pay, Paytm or any UPI app.</p>
+
+<div class="qr-wrapper">
+<img
+src="https://pvtbro.carrd.co/assets/images/image01.jpg?v=efe9faee"
+alt="Tournament Payment QR Code">
+</div>
+
+<div class="qr-instruction">
+Open your UPI application and scan this QR code to make the payment.
+</div>
+
+<div class="warning">
+⚠️ Make sure you have paid the correct entry fee. Keep your transaction screenshot ready. Never share your UPI PIN or OTP.
+</div>
+
+</div>
+
+<label class="payment-check">
+<input type="checkbox" id="paymentDone">
+<span>
+<strong>Yes, I have completed my payment</strong>
+<small>I confirm that I have scanned the QR code and successfully made the entry fee payment.</small>
+</span>
+</label>
+
+<div class="status" id="paymentStatus">
+Please confirm your payment to unlock booking.
+</div>
+
+<button class="btn" id="continueBooking" disabled>
+BOOK MY TEAM SLOT →
+</button>
+
+<button class="btn btn-back" id="backDetails" type="button">
+← BACK TO TEAM DETAILS
+</button>
+
+</section>
+
+<!-- SCREEN 3 -->
+
+<section class="screen" id="bookingScreen">
+
+<h2 class="section-title">Confirm Your Booking</h2>
+<p class="section-desc">
+Review your squad information before sending your booking request.
+</p>
+
+<div class="summary">
+  <div class="summary-head">🏆 TEAM DETAILS</div>
+  <div class="summary-row">
+    <span>Team Name</span>
+    <strong id="summaryTeam"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Captain Number</span>
+    <strong id="summaryPhone"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Player 1 (IGL)</span>
+    <strong id="summaryP1"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Player 2</span>
+    <strong id="summaryP2"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Player 3</span>
+    <strong id="summaryP3"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Player 4</span>
+    <strong id="summaryP4"></strong>
+  </div>
+  <div class="summary-row">
+    <span>Payment Declaration</span>
+    <strong style="color:#078550">✓ Marked as Paid</strong>
+  </div>
+</div>
+
+<div class="info-box">
+  📱 On clicking the button, WhatsApp will open with your complete registration details. Please attach your payment screenshot before sending.
+  <br><br>
+  Your slot is not confirmed until the admin verifies payment and provides an official slot number.
+</div>
+
+<button class="btn" id="sendWhatsApp">
+  SEND BOOKING ON WHATSAPP →
+</button>
+
+<button class="btn btn-back" id="backPayment" type="button">
+  ← BACK TO PAYMENT
+</button>
+
+</section>
+
+</main>
+
+<footer class="footer">
+DJ ESPORTS 2017<br>
+Tournament Registration Portal
+</footer>
+
+</div>
+
+<!-- SUCCESS MODAL -->
+
+<div class="modal-overlay" id="successModal">
+<div class="modal">
+  <div class="modal-icon">✓</div>
+  <h2>WhatsApp Ready!</h2>
+  <p>
+    Your booking details are ready. WhatsApp will open with your registration message.
+    <br><br>
+    Please attach your payment screenshot and send the message to the admin.
+  </p>
+  <button class="btn" id="openWhatsApp">
+    BOOK NOW →
+  </button>
+  <button class="btn btn-back" id="closeModal">
+    GO BACK
+  </button>
+</div>
 </div>
 
 <script>
 
 const ADMIN_WHATSAPP = "919813565729";
 
+const form = document.getElementById("registrationForm");
+const paymentCheckbox = document.getElementById("paymentDone");
+const continueBooking = document.getElementById("continueBooking");
+const paymentStatus = document.getElementById("paymentStatus");
+
+let whatsappUrl = "";
+
+const screens = {
+  details:document.getElementById("detailsScreen"),
+  payment:document.getElementById("paymentScreen"),
+  booking:document.getElementById("bookingScreen")
+};
+
+const steps = [
+  document.getElementById("step1"),
+  document.getElementById("step2"),
+  document.getElementById("step3")
+];
+
 const slotsGrid = document.getElementById("slotsGrid");
 
 for(let i=1;i<=25;i++){
-
   const bar=document.createElement("div");
-
   bar.className="slot-bar";
   bar.title="Slot "+i;
-
   slotsGrid.appendChild(bar);
-
 }
 
-const form=document.getElementById("registrationForm");
-const modal=document.getElementById("confirmationModal");
+function showScreen(name){
 
-let whatsappUrl="";
+  Object.values(screens).forEach(screen=>{
+    screen.classList.remove("active");
+  });
+
+  screens[name].classList.add("active");
+
+  const current = name==="details" ? 0 :
+                  name==="payment" ? 1 : 2;
+
+  steps.forEach((step,index)=>{
+    step.classList.toggle("active",index===current);
+    step.classList.toggle("done",index<current);
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getDetails(){
+
+  return {
+    team:document.getElementById("teamName").value.trim(),
+    phone:document.getElementById("whatsappNumber").value.trim(),
+    players:[
+      document.getElementById("player1").value.trim(),
+      document.getElementById("player2").value.trim(),
+      document.getElementById("player3").value.trim(),
+      document.getElementById("player4").value.trim()
+    ]
+  };
+}
+
+// STEP 1 -> STEP 2
 
 form.addEventListener("submit",function(e){
 
   e.preventDefault();
 
-  const teamName=document.getElementById("teamName").value.trim();
+  if(!form.reportValidity()) return;
 
-  const phone=document.getElementById("whatsappNumber").value.trim();
+  const details=getDetails();
 
-  const players=[
-    document.getElementById("player1").value.trim(),
-    document.getElementById("player2").value.trim(),
-    document.getElementById("player3").value.trim(),
-    document.getElementById("player4").value.trim()
-  ];
-
-  if(!/^[0-9]{10}$/.test(phone)){
+  if(!/^[0-9]{10}$/.test(details.phone)){
     alert("Please enter a valid 10-digit WhatsApp number.");
     return;
   }
 
-  if(!teamName || players.some(p=>!p)){
-    alert("Please complete all registration fields.");
+  showScreen("payment");
+
+});
+
+// PAYMENT CHECKBOX
+
+paymentCheckbox.addEventListener("change",function(){
+
+  const paid=this.checked;
+
+  continueBooking.disabled=!paid;
+
+  paymentStatus.classList.toggle("ready",paid);
+
+  paymentStatus.textContent=paid
+    ? "✓ Payment declaration completed. You can continue."
+    : "Please confirm your payment to unlock booking.";
+
+});
+
+// STEP 2 -> STEP 3
+
+continueBooking.addEventListener("click",function(){
+
+  if(!paymentCheckbox.checked){
+    alert("Please confirm your payment first.");
     return;
   }
 
+  const d=getDetails();
+
+  document.getElementById("summaryTeam").textContent=d.team;
+  document.getElementById("summaryPhone").textContent=d.phone;
+  document.getElementById("summaryP1").textContent=d.players[0];
+  document.getElementById("summaryP2").textContent=d.players[1];
+  document.getElementById("summaryP3").textContent=d.players[2];
+  document.getElementById("summaryP4").textContent=d.players[3];
+
+  showScreen("booking");
+
+});
+
+// BACK BUTTONS
+
+document.getElementById("backDetails").addEventListener("click",()=>{
+  showScreen("details");
+});
+
+document.getElementById("backPayment").addEventListener("click",()=>{
+  showScreen("payment");
+});
+
+// WHATSAPP MESSAGE
+
+document.getElementById("sendWhatsApp").addEventListener("click",function(){
+
+  if(!paymentCheckbox.checked){
+    alert("Please confirm payment first.");
+    showScreen("payment");
+    return;
+  }
+
+  const d=getDetails();
+
   const message =
-`🏆 *NEW TOURNAMENT SLOT REGISTRATION*
+`🏆 *DJ ESPORTS 2017 - NEW TEAM BOOKING*
 ━━━━━━━━━━━━━━━━━━━━
 
 Hello Tournament Admin! 👋
 
-I want to register my squad for the upcoming tournament. Please find my complete team details below.
+I want to register my team for the tournament.
 
 📋 *TEAM INFORMATION*
-━━━━━━━━━━━━━━━━━━━━
 
-🏷️ Team Name: ${teamName}
-
-📱 Captain WhatsApp Number: ${phone}
+🏷️ Team Name: ${d.team}
+📱 Captain WhatsApp: ${d.phone}
 
 👥 *SQUAD ROSTER*
-━━━━━━━━━━━━━━━━━━━━
 
-1️⃣ Player 1 (IGL): ${players[0]}
-2️⃣ Player 2: ${players[1]}
-3️⃣ Player 3: ${players[2]}
-4️⃣ Player 4: ${players[3]}
+1. Player 1 (IGL): ${d.players[0]}
+2. Player 2: ${d.players[1]}
+3. Player 3: ${d.players[2]}
+4. Player 4: ${d.players[3]}
 
 💳 *PAYMENT INFORMATION*
-━━━━━━━━━━━━━━━━━━━━
 
 Payment Method: UPI QR Code
-Payment Status: Paid / Awaiting Verification
+Payment Declaration: PAID (Player confirmed)
 Payment Screenshot: Will be attached in this chat.
 
-🎮 *REGISTRATION REQUEST*
-━━━━━━━━━━━━━━━━━━━━
+🎮 *BOOKING REQUEST*
 
-Please verify my team details and payment.
+Please verify the payment and confirm my registration.
 
-Kindly provide:
+Kindly share:
 
-✅ Registration confirmation
-✅ Official Team Slot Number
+✅ Payment verification
+✅ Official team slot number
 ✅ Tournament schedule
 ✅ Reporting time
-✅ Further tournament instructions
+✅ Further instructions
 
-I understand that my registration is subject to admin verification and official confirmation.
+I understand that the slot will be confirmed only after admin verification.
 
 Thank you! 🙏
 
-*TEAM NAME: ${teamName}*
-*WAITING FOR OFFICIAL SLOT CONFIRMATION* 🏆`;
+*TEAM: ${d.team}*
+*DJ ESPORTS 2017* 🏆`;
 
   whatsappUrl =
     "https://wa.me/"+ADMIN_WHATSAPP+
     "?text="+encodeURIComponent(message);
 
-  modal.classList.add("active");
+  document.getElementById("successModal").classList.add("active");
 
 });
 
-document.getElementById("okBtn").addEventListener("click",function(){
+// BOOK NOW
 
-  if(!whatsappUrl)return;
+document.getElementById("openWhatsApp").addEventListener("click",function(){
+
+  if(!whatsappUrl) return;
 
   window.location.href=whatsappUrl;
 
 });
 
-document.getElementById("cancelBtn").addEventListener("click",function(){
-
-  modal.classList.remove("active");
-
+document.getElementById("closeModal").addEventListener("click",function(){
+  document.getElementById("successModal").classList.remove("active");
 });
 
 </script>
