@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b2c59">
-<title>DJ ESPORTS 2017 | Official Slot Registration Portal</title>
+<title>DJ ESPORTS | Official Slot Registration Portal</title>
 <link rel="icon" type="image/png" href="1000102952.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1019,7 +1019,7 @@ input::placeholder {
       </div>
       <div>
         <div class="gov-sub">ESPORTS TOURNAMENT AUTHORITY</div>
-        <h1>DJ ESPORTS 2017</h1>
+        <h1>DJ ESPORTS</h1>
         <div class="gov-portal-desc">Online Squad Slot Allocation & Verification System</div>
       </div>
     </div>
@@ -1066,7 +1066,7 @@ input::placeholder {
         </div>
         <div>
           <h3>Restricted Tournament Access</h3>
-          <p>Enter the official <strong>Booking Code</strong> issued by DJ ESPORTS 2017 desk to unlock the squad registration form.</p>
+          <p>Enter the official <strong>Booking Code</strong> issued by DJ ESPORTS desk to unlock the squad registration form.</p>
         </div>
       </div>
 
@@ -1366,7 +1366,7 @@ input::placeholder {
 </div>
 
 <footer class="gov-footer">
-  <strong>DJ ESPORTS 2017 — TOURNAMENT MANAGEMENT DESK</strong><br>
+  <strong>DJ ESPORTS — TOURNAMENT MANAGEMENT DESK</strong><br>
   Official Online Slot Booking & Verification Portal · All Rights Reserved
 </footer>
 
@@ -1496,7 +1496,7 @@ loginForm.addEventListener("submit", async function (e) {
         unlockPortal(enteredCode);
       }, 450);
     } else {
-      setLoginAlert("error", "✕ Invalid Booking Code. Please check your code or contact DJ ESPORTS 2017 admin.");
+      setLoginAlert("error", "✕ Invalid Booking Code. Please check your code or contact DJ ESPORTS admin.");
     }
   } catch (err) {
     setLoginAlert("error", "Connection failed! Please ensure the Google Sheet is set to 'Anyone with the link can view' and try again.");
@@ -1639,7 +1639,7 @@ document.getElementById("sendWhatsApp").addEventListener("click", function () {
 
   const d = getDetails();
   generatedWhatsappMessage =
-`*DJ ESPORTS 2017*
+`*DJ ESPORTS*
 *OFFICIAL TEAM REGISTRATION*
 
 ━━━━━━━━━━━━━━━━━━
@@ -1661,7 +1661,7 @@ Payment Proof: Attached
 ━━━━━━━━━━━━━━━━━━
 Please review our registration and confirm the team slot after payment verification.
 
-*Thank You | DJ ESPORTS 2017*`;
+*Thank You | DJ ESPORTS*`;
 
   const finalUrl = "https://api.whatsapp.com/send?phone=" + ADMIN_WHATSAPP + "&text=" + encodeURIComponent(generatedWhatsappMessage);
   openWhatsAppLink.setAttribute("href", finalUrl);
