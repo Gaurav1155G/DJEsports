@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b2c59">
 <title>DJ ESPORTS | Official Slot Registration Portal</title>
-<link rel="icon" type="image/png" href="1000102952.png">
+<link rel="icon" type="image/jpeg" href="https://pvtbro.carrd.co/assets/images/image02.jpg?v=a95da8b9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans:wght@500;700;800&display=swap" rel="stylesheet">
@@ -29,6 +29,7 @@
   --warning-bg: #fffbeb;
   --warning-border: #f59e0b;
   --warning-text: #92400e;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -36,6 +37,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -44,6 +50,50 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ANIMATIONS */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shakeError 0.35s ease-in-out;
+}
+
+.spin-icon {
+  animation: spin 0.8s linear infinite;
 }
 
 /* TOP GOVERNMENT STRIP */
@@ -81,7 +131,10 @@ body {
   color: #ffffff;
   padding: 16px 14px;
   border-bottom: 3px solid var(--saffron);
-  box-shadow: 0 2px 8px rgba(11, 44, 89, 0.15);
+  box-shadow: 0 2px 10px rgba(11, 44, 89, 0.16);
+  position: sticky;
+  top: 0;
+  z-index: 40;
 }
 
 .gov-header-inner {
@@ -110,6 +163,11 @@ body {
   border: 2px solid #a855f7;
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.45);
   overflow: hidden;
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+.emblem-box:hover {
+  transform: scale(1.04);
 }
 
 .emblem-box img {
@@ -163,11 +221,22 @@ body {
   gap: 5px;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: background 0.15s;
+  transition: all 0.2s var(--ease-smooth);
 }
 
 .check-slot-btn:hover {
-  background: #f1f5f9;
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.check-slot-btn:active {
+  transform: translateY(0);
+}
+
+.check-slot-btn.active-view {
+  background: var(--saffron);
+  color: #ffffff;
+  border-color: var(--saffron);
 }
 
 .logout-btn {
@@ -182,14 +251,15 @@ body {
   display: none;
   align-items: center;
   gap: 4px;
+  transition: all 0.2s ease;
 }
 
 .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.85);
+  background: rgba(239, 68, 68, 0.9);
   border-color: #ef4444;
 }
 
-/* NOTICE MARQUEE BAR */
+/* NOTICE BAR */
 .notice-strip {
   background: #fff8eb;
   border-bottom: 1px solid #fde68a;
@@ -233,6 +303,7 @@ body {
   border-radius: 6px;
   padding: 14px 16px;
   margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .progress {
@@ -251,6 +322,12 @@ body {
   font-size: 11.5px;
   color: var(--muted);
   font-weight: 600;
+  transition: color 0.25s ease;
+  user-select: none;
+}
+
+.progress-item.done {
+  cursor: pointer;
 }
 
 .progress-item span {
@@ -263,6 +340,7 @@ body {
   color: #475569;
   font-size: 11.5px;
   font-weight: 800;
+  transition: all 0.25s var(--ease-smooth);
 }
 
 .progress-item.active {
@@ -273,6 +351,7 @@ body {
 .progress-item.active span {
   background: var(--navy);
   color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(11, 44, 89, 0.14);
 }
 
 .progress-item.done {
@@ -289,6 +368,11 @@ body {
   height: 2px;
   flex: 0.35;
   background: #cbd5e1;
+  transition: background 0.3s ease;
+}
+
+.progress-line.done {
+  background: var(--green);
 }
 
 /* FORM PANEL */
@@ -297,7 +381,8 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+  animation: fadeSlideUp 0.3s var(--ease-smooth);
 }
 
 .card-banner {
@@ -307,6 +392,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .card-banner h2 {
@@ -324,6 +410,7 @@ body {
   background: #e2e8f0;
   padding: 3px 7px;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .card-body {
@@ -336,6 +423,7 @@ body {
 
 .screen.active {
   display: block;
+  animation: fadeSlideUp 0.28s var(--ease-smooth);
 }
 
 .section-desc {
@@ -409,6 +497,7 @@ body {
   place-items: center;
   color: var(--navy);
   z-index: 2;
+  pointer-events: none;
 }
 
 .login-alert {
@@ -419,6 +508,7 @@ body {
   font-weight: 600;
   margin-bottom: 15px;
   line-height: 1.5;
+  animation: fadeSlideUp 0.2s ease;
 }
 
 .login-alert.error {
@@ -492,10 +582,16 @@ body {
 }
 
 .slot-bar {
-  height: 10px;
+  height: 11px;
   border-radius: 2px;
   background: #22c55e;
   border: 1px solid #16a34a;
+  transition: transform 0.18s ease, background-color 0.25s ease;
+  cursor: pointer;
+}
+
+.slot-bar:hover {
+  transform: scaleY(1.3);
 }
 
 .slot-bar.filled {
@@ -553,12 +649,17 @@ input:not([type="checkbox"]) {
   font-size: 13px;
   color: #0f172a;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 input:focus {
   border-color: var(--navy);
   box-shadow: 0 0 0 3px rgba(11, 44, 89, 0.12);
+}
+
+input.input-error {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
 }
 
 input::placeholder {
@@ -582,18 +683,19 @@ input::placeholder {
 
 .player b {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 1px;
+  top: 1px;
+  bottom: 1px;
   width: 30px;
   background: #f1f5f9;
   border-right: 1px solid #cbd5e1;
-  border-radius: 4px 0 0 4px;
+  border-radius: 3px 0 0 3px;
   display: grid;
   place-items: center;
   color: var(--navy);
   font-size: 11px;
   font-weight: 800;
+  pointer-events: none;
 }
 
 .info-box {
@@ -633,11 +735,16 @@ input::placeholder {
   justify-content: center;
   gap: 8px;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
 }
 
 .btn:hover:not(:disabled) {
   background: var(--navy-dark);
+  box-shadow: 0 3px 8px rgba(11, 44, 89, 0.18);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.99);
 }
 
 .btn:disabled {
@@ -645,6 +752,7 @@ input::placeholder {
   border-color: #cbd5e1;
   color: #64748b;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .btn-green {
@@ -655,6 +763,7 @@ input::placeholder {
 
 .btn-green:hover:not(:disabled) {
   background: #0f5c28;
+  box-shadow: 0 3px 8px rgba(19, 115, 51, 0.2);
 }
 
 .btn-back {
@@ -665,9 +774,10 @@ input::placeholder {
   font-weight: 600;
 }
 
-.btn-back:hover {
+.btn-back:hover:not(:disabled) {
   background: #f1f5f9;
   color: #0f172a;
+  box-shadow: none;
 }
 
 /* PAYMENT CHALLAN BOX */
@@ -696,8 +806,9 @@ input::placeholder {
   padding: 10px;
   background: #ffffff;
   border: 1px solid #94a3b8;
-  border-radius: 4px;
+  border-radius: 6px;
   margin: 14px 0 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .qr-wrapper img {
@@ -744,6 +855,11 @@ input::placeholder {
   margin: 15px 0;
   text-align: left;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.payment-check:hover {
+  background: #dcfce7;
 }
 
 .payment-check input[type="checkbox"] {
@@ -779,6 +895,7 @@ input::placeholder {
   border-radius: 4px;
   padding: 9px;
   margin-bottom: 14px;
+  transition: all 0.25s ease;
 }
 
 .status.ready {
@@ -831,6 +948,7 @@ input::placeholder {
   max-height: 410px;
   overflow-y: auto;
   margin: 14px 0;
+  scroll-behavior: smooth;
 }
 
 .slot-table {
@@ -852,8 +970,16 @@ input::placeholder {
   z-index: 2;
 }
 
+.slot-table tbody tr {
+  transition: background 0.15s ease;
+}
+
 .slot-table tbody tr:nth-child(even) {
   background: #f8fafc;
+}
+
+.slot-table tbody tr:hover {
+  background: #eef2ff;
 }
 
 .slot-table td {
@@ -934,6 +1060,7 @@ input::placeholder {
   justify-content: center;
   padding: 16px;
   background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(3px);
 }
 
 .modal-overlay.active {
@@ -950,6 +1077,7 @@ input::placeholder {
   padding: 22px 18px;
   text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.25s var(--ease-smooth);
 }
 
 .modal-icon {
@@ -1029,7 +1157,7 @@ input::placeholder {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
         </svg>
-        SLOT STATUS
+        <span id="openSlotsLabel">SLOT STATUS</span>
       </button>
       <button class="logout-btn" id="logoutBtn" type="button">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
@@ -1070,9 +1198,9 @@ input::placeholder {
         </div>
       </div>
 
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
         <div class="field">
-          <label>Official Booking Code <span class="req">*</span></label>
+          <label for="bookingCodeInput">Official Booking Code <span class="req">*</span></label>
           <div class="code-input-wrap">
             <div class="code-input-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
@@ -1108,15 +1236,15 @@ input::placeholder {
     <!-- STEPPER -->
     <div class="stepper-card" id="stepperBox">
       <div class="progress">
-        <div class="progress-item active" id="step1">
+        <div class="progress-item active" id="step1" title="Step 1: Squad Form">
           <span>1</span>Squad Form
         </div>
-        <div class="progress-line"></div>
-        <div class="progress-item" id="step2">
+        <div class="progress-line" id="line1"></div>
+        <div class="progress-item" id="step2" title="Step 2: Fee Payment">
           <span>2</span>Fee Payment
         </div>
-        <div class="progress-line"></div>
-        <div class="progress-item" id="step3">
+        <div class="progress-line" id="line2"></div>
+        <div class="progress-item" id="step3" title="Step 3: Submission">
           <span>3</span>Submission
         </div>
       </div>
@@ -1153,16 +1281,16 @@ input::placeholder {
             </div>
           </div>
 
-          <form id="registrationForm">
+          <form id="registrationForm" novalidate>
             <div class="sub-section-title">Section A: Team & Captain Particulars</div>
 
             <div class="field">
-              <label>1. Official Squad / Team Name <span class="req">*</span></label>
+              <label for="teamName">1. Official Squad / Team Name <span class="req">*</span></label>
               <input id="teamName" type="text" placeholder="Enter registered squad name" required>
             </div>
 
             <div class="field">
-              <label>2. Captain Mobile Number (WhatsApp Enabled) <span class="req">*</span></label>
+              <label for="whatsappNumber">2. Captain Mobile Number (WhatsApp Enabled) <span class="req">*</span></label>
               <input id="whatsappNumber" type="tel" autocomplete="tel"
                 inputmode="numeric" maxlength="10"
                 pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number" required>
@@ -1188,6 +1316,8 @@ input::placeholder {
                 <input id="player4" type="text" placeholder="Player 4 IGN" required>
               </div>
             </div>
+
+            <div class="login-alert" id="formAlert"></div>
 
             <div class="info-box">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -1231,7 +1361,7 @@ input::placeholder {
             </div>
           </div>
 
-          <label class="payment-check">
+          <label class="payment-check" for="paymentDone">
             <input type="checkbox" id="paymentDone">
             <span>
               <strong>Self-Declaration of Fee Payment</strong>
@@ -1243,7 +1373,7 @@ input::placeholder {
             Status: Pending Self-Declaration. Tick the checkbox above to proceed.
           </div>
 
-          <button class="btn" id="continueBooking" disabled>
+          <button class="btn" id="continueBooking" type="button" disabled>
             PROCEED TO FINAL REVIEW
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
               <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
@@ -1353,10 +1483,10 @@ input::placeholder {
         <div class="slot-message" id="slotMessage">Fetching official records...</div>
 
         <button class="btn" id="refreshSlots" type="button" style="margin-top:14px">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <svg id="refreshIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
             <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
           </svg>
-          REFRESH REGISTER
+          <span id="refreshBtnText">REFRESH REGISTER</span>
         </button>
         <button class="btn btn-back" id="backFromSlots" type="button">← Return to Registration Form</button>
       </div>
@@ -1384,7 +1514,6 @@ input::placeholder {
       <br><br>
       <strong>Mandatory:</strong> Attach your UPI payment screenshot in the chat before sending.
     </p>
-    <!-- DIRECT ANCHOR LINK FOR RELIABLE MOBILE WHATSAPP REDIRECT -->
     <a class="btn btn-green" id="openWhatsApp" href="#" target="_blank" rel="noopener noreferrer">
       PROCEED TO WHATSAPP →
     </a>
@@ -1405,119 +1534,30 @@ const SLOT_API_URL = "https://docs.google.com/spreadsheets/d/1yU_X1vsQuCpJ0RMzw9
 
 let verifiedBookingCode = "";
 let generatedWhatsappMessage = "";
+let lastFormScreen = "details";
+let isFetchingSlots = false;
 
+// ALL DOM ELEMENTS DECLARED FIRST TO PREVENT INITIALIZATION REFERENCE ERRORS
 const loginCard = document.getElementById("loginCard");
 const portalWrapper = document.getElementById("portalWrapper");
 const loginForm = document.getElementById("loginForm");
 const bookingCodeInput = document.getElementById("bookingCodeInput");
 const loginAlert = document.getElementById("loginAlert");
+const formAlert = document.getElementById("formAlert");
 const verifyLoginBtn = document.getElementById("verifyLoginBtn");
 const openSlotsBtn = document.getElementById("openSlots");
+const openSlotsLabel = document.getElementById("openSlotsLabel");
 const logoutBtn = document.getElementById("logoutBtn");
 const noticeText = document.getElementById("noticeText");
 const activeCodeBadge = document.getElementById("activeCodeBadge");
-
-function setLoginAlert(type, msg) {
-  loginAlert.className = "login-alert " + type;
-  loginAlert.textContent = msg;
-}
-
-function parseCSVRows(text) {
-  const lines = text.split(/\r?\n/);
-  const rows = [];
-  for (let i = 0; i < lines.length; i++) {
-    if (!lines[i].trim()) continue;
-    const cols = lines[i].split(",").map(c => c.trim().replace(/^"|"$/g, ""));
-    rows.push(cols);
-  }
-  return rows;
-}
-
-function unlockPortal(code) {
-  verifiedBookingCode = code;
-  sessionStorage.setItem("dj_verified_code", code);
-
-  loginCard.style.display = "none";
-  portalWrapper.style.display = "block";
-  openSlotsBtn.style.display = "inline-flex";
-  logoutBtn.style.display = "inline-flex";
-
-  activeCodeBadge.textContent = "✓ Verified Booking Code: " + code;
-  noticeText.textContent = "All slots are allotted strictly on a First-Come, First-Served basis after payment verification.";
-
-  showScreen("details");
-  loadSlots();
-}
-
-function lockPortal() {
-  verifiedBookingCode = "";
-  sessionStorage.removeItem("dj_verified_code");
-
-  portalWrapper.style.display = "none";
-  openSlotsBtn.style.display = "none";
-  logoutBtn.style.display = "none";
-  loginCard.style.display = "block";
-  bookingCodeInput.value = "";
-  loginAlert.className = "login-alert";
-  noticeText.textContent = "Authorized Booking Code verification is mandatory to access the registration portal.";
-}
-
-loginForm.addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const enteredCode = bookingCodeInput.value.trim();
-
-  if (!enteredCode) {
-    setLoginAlert("error", "Please enter a valid Booking Code.");
-    return;
-  }
-
-  verifyLoginBtn.disabled = true;
-  verifyLoginBtn.textContent = "VERIFYING WITH OFFICIAL SERVER...";
-  setLoginAlert("loading", "Checking Booking Code in official Google Sheets database...");
-
-  try {
-    const response = await fetch(LOGIN_CODES_API_URL, { cache: "no-store" });
-    if (!response.ok) throw new Error("HTTP " + response.status);
-
-    const csvText = await response.text();
-    const rows = parseCSVRows(csvText);
-
-    const validCodes = new Set();
-    for (let i = 1; i < rows.length; i++) {
-      const col1 = (rows[i][0] || "").trim().toLowerCase();
-      const col2 = (rows[i][1] || "").trim().toLowerCase();
-      if (col1) validCodes.add(col1);
-      if (col2) validCodes.add(col2);
-    }
-
-    if (validCodes.has(enteredCode.toLowerCase())) {
-      setLoginAlert("success", "✓ Code Verified! Unlocking registration portal...");
-      setTimeout(() => {
-        unlockPortal(enteredCode);
-      }, 450);
-    } else {
-      setLoginAlert("error", "✕ Invalid Booking Code. Please check your code or contact DJ ESPORTS admin.");
-    }
-  } catch (err) {
-    setLoginAlert("error", "Connection failed! Please ensure the Google Sheet is set to 'Anyone with the link can view' and try again.");
-  } finally {
-    verifyLoginBtn.disabled = false;
-    verifyLoginBtn.innerHTML = `VERIFY CODE & ACCESS PORTAL <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-  }
-});
-
-logoutBtn.addEventListener("click", lockPortal);
-
-const savedCode = sessionStorage.getItem("dj_verified_code");
-if (savedCode) {
-  unlockPortal(savedCode);
-}
 
 const form = document.getElementById("registrationForm");
 const paymentCheckbox = document.getElementById("paymentDone");
 const continueBooking = document.getElementById("continueBooking");
 const paymentStatus = document.getElementById("paymentStatus");
 const bannerTitle = document.getElementById("bannerTitle");
+const stepperBox = document.getElementById("stepperBox");
+const mainFormCard = document.getElementById("mainFormCard");
 
 const screens = {
   details: document.getElementById("detailsScreen"),
@@ -1532,6 +1572,24 @@ const steps = [
   document.getElementById("step3")
 ];
 
+const lines = [
+  document.getElementById("line1"),
+  document.getElementById("line2")
+];
+
+const slotList = document.getElementById("slotList");
+const slotCount = document.getElementById("slotCount");
+const slotMessage = document.getElementById("slotMessage");
+const capacityBadge = document.getElementById("capacityBadge");
+const refreshSlotsBtn = document.getElementById("refreshSlots");
+const refreshIcon = document.getElementById("refreshIcon");
+const refreshBtnText = document.getElementById("refreshBtnText");
+
+const openWhatsAppLink = document.getElementById("openWhatsApp");
+const copyMsgBtn = document.getElementById("copyMsgBtn");
+const copyStatus = document.getElementById("copyStatus");
+const successModal = document.getElementById("successModal");
+
 const slotsGrid = document.getElementById("slotsGrid");
 const slotBars = [];
 
@@ -1539,34 +1597,236 @@ for (let i = 1; i <= 25; i++) {
   const bar = document.createElement("div");
   bar.className = "slot-bar";
   bar.title = "Slot " + i + " (Vacant)";
+  bar.addEventListener("click", () => {
+    showScreen("slots");
+    loadSlots();
+  });
   slotsGrid.appendChild(bar);
   slotBars.push(bar);
 }
 
+// ROBUST CSV PARSER (Handles quoted commas and CRLF cleanly)
+function parseCSVLine(line) {
+  const result = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        cur += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (ch === "," && !inQuotes) {
+      result.push(cur.trim());
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  result.push(cur.trim());
+  return result.map(val => val.replace(/^"|"$/g, "").trim());
+}
+
+function parseCSVRows(text) {
+  const lines = text.split(/\r?\n/);
+  const rows = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    rows.push(parseCSVLine(lines[i]));
+  }
+  return rows;
+}
+
+function setAlert(el, type, msg) {
+  if (!type) {
+    el.className = "login-alert";
+    el.textContent = "";
+    return;
+  }
+  el.className = "login-alert " + type;
+  el.textContent = msg;
+}
+
 function showScreen(name) {
   Object.values(screens).forEach(screen => screen.classList.remove("active"));
-  screens[name].classList.add("active");
+  if (screens[name]) {
+    screens[name].classList.add("active");
+  }
 
   const isSlots = name === "slots";
-  document.getElementById("stepperBox").style.display = isSlots ? "none" : "block";
-  document.getElementById("mainFormCard").style.display = isSlots ? "none" : "block";
+  stepperBox.style.display = isSlots ? "none" : "block";
+  mainFormCard.style.display = isSlots ? "none" : "block";
+
+  openSlotsBtn.classList.toggle("active-view", isSlots);
+  openSlotsLabel.textContent = isSlots ? "← FORM VIEW" : "SLOT STATUS";
 
   if (!isSlots) {
+    lastFormScreen = name;
     const titles = {
       details: "Application Form — Squad Registration",
       payment: "Step 2 — Entry Fee Payment Challan",
       booking: "Step 3 — Final Review & Submission"
     };
-    bannerTitle.textContent = titles[name];
+    bannerTitle.textContent = titles[name] || titles.details;
 
     const current = name === "details" ? 0 : name === "payment" ? 1 : 2;
     steps.forEach((step, index) => {
       step.classList.toggle("active", index === current);
       step.classList.toggle("done", index < current);
     });
+    lines.forEach((line, index) => {
+      line.classList.toggle("done", index < current);
+    });
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ALLOW CLICKING COMPLETED STEPPER ITEMS TO GO BACK SMOOTHLY
+steps.forEach((stepEl, idx) => {
+  stepEl.addEventListener("click", () => {
+    if (stepEl.classList.contains("done")) {
+      if (idx === 0) showScreen("details");
+      if (idx === 1) showScreen("payment");
+    }
+  });
+});
+
+function unlockPortal(code) {
+  verifiedBookingCode = code;
+  sessionStorage.setItem("dj_verified_code", code);
+
+  loginCard.style.display = "none";
+  portalWrapper.style.display = "block";
+  openSlotsBtn.style.display = "inline-flex";
+  logoutBtn.style.display = "inline-flex";
+
+  activeCodeBadge.textContent = "✓ Verified Booking Code: " + code;
+  noticeText.textContent = "All slots are allotted strictly on a First-Come, First-Served basis after payment verification.";
+
+  restoreDraftForm();
+  showScreen("details");
+  loadSlots();
+}
+
+function lockPortal() {
+  verifiedBookingCode = "";
+  sessionStorage.removeItem("dj_verified_code");
+
+  portalWrapper.style.display = "none";
+  openSlotsBtn.style.display = "none";
+  logoutBtn.style.display = "none";
+  loginCard.style.display = "block";
+  bookingCodeInput.value = "";
+  setAlert(loginAlert, "", "");
+  setAlert(formAlert, "", "");
+  successModal.classList.remove("active");
+  noticeText.textContent = "Authorized Booking Code verification is mandatory to access the registration portal.";
+}
+
+loginForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const enteredCode = bookingCodeInput.value.trim();
+
+  if (!enteredCode) {
+    setAlert(loginAlert, "error", "Please enter a valid Booking Code.");
+    bookingCodeInput.classList.add("input-error", "shake");
+    setTimeout(() => bookingCodeInput.classList.remove("shake"), 400);
+    bookingCodeInput.focus();
+    return;
+  }
+
+  bookingCodeInput.classList.remove("input-error");
+  verifyLoginBtn.disabled = true;
+  verifyLoginBtn.textContent = "VERIFYING WITH OFFICIAL SERVER...";
+  setAlert(loginAlert, "loading", "Checking Booking Code in official Google Sheets database...");
+
+  try {
+    const url = LOGIN_CODES_API_URL + "&_t=" + Date.now();
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+
+    const csvText = await response.text();
+    const rows = parseCSVRows(csvText);
+
+    const validCodes = new Set();
+    const ignoredHeaders = new Set(["code", "booking code", "booking_code", "codes", "sr no", "s.no", "slot"]);
+
+    for (let i = 0; i < rows.length; i++) {
+      for (let c = 0; c < Math.min(rows[i].length, 3); c++) {
+        const cell = (rows[i][c] || "").trim().toLowerCase();
+        if (cell && !ignoredHeaders.has(cell)) {
+          validCodes.add(cell);
+        }
+      }
+    }
+
+    if (validCodes.has(enteredCode.toLowerCase())) {
+      setAlert(loginAlert, "success", "✓ Code Verified! Unlocking registration portal...");
+      setTimeout(() => {
+        unlockPortal(enteredCode);
+      }, 320);
+    } else {
+      setAlert(loginAlert, "error", "✕ Invalid Booking Code. Please check your code or contact DJ ESPORTS admin.");
+      bookingCodeInput.classList.add("input-error", "shake");
+      setTimeout(() => bookingCodeInput.classList.remove("shake"), 400);
+    }
+  } catch (err) {
+    setAlert(loginAlert, "error", "Connection failed! Please ensure the Google Sheet is set to 'Anyone with the link can view' and try again.");
+  } finally {
+    verifyLoginBtn.disabled = false;
+    verifyLoginBtn.innerHTML = `VERIFY CODE & ACCESS PORTAL <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+  }
+});
+
+logoutBtn.addEventListener("click", lockPortal);
+
+// AUTO-FORMAT MOBILE NUMBER & SAVE DRAFT STATE
+const whatsappInput = document.getElementById("whatsappNumber");
+const draftFieldIds = ["teamName", "whatsappNumber", "player1", "player2", "player3", "player4"];
+
+whatsappInput.addEventListener("input", function () {
+  let digits = this.value.replace(/\D/g, "");
+  if (digits.length > 10 && digits.startsWith("91")) {
+    digits = digits.slice(2);
+  }
+  this.value = digits.slice(0, 10);
+  this.classList.remove("input-error");
+  saveDraftForm();
+});
+
+draftFieldIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener("input", () => {
+    el.classList.remove("input-error");
+    setAlert(formAlert, "", "");
+    saveDraftForm();
+  });
+});
+
+function saveDraftForm() {
+  const draft = {};
+  draftFieldIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) draft[id] = el.value;
+  });
+  sessionStorage.setItem("dj_form_draft", JSON.stringify(draft));
+}
+
+function restoreDraftForm() {
+  try {
+    const raw = sessionStorage.getItem("dj_form_draft");
+    if (!raw) return;
+    const draft = JSON.parse(raw);
+    draftFieldIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && draft[id]) el.value = draft[id];
+    });
+  } catch (e) {}
 }
 
 function getDetails() {
@@ -1585,13 +1845,30 @@ function getDetails() {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  if (!form.reportValidity()) return;
+  setAlert(formAlert, "", "");
+
+  const requiredIds = ["teamName", "whatsappNumber", "player1", "player2", "player3", "player4"];
+  for (const id of requiredIds) {
+    const input = document.getElementById(id);
+    if (!input.value.trim()) {
+      input.classList.add("input-error", "shake");
+      setTimeout(() => input.classList.remove("shake"), 400);
+      input.focus();
+      setAlert(formAlert, "error", "Please fill in all mandatory squad details (*).");
+      return;
+    }
+  }
 
   const details = getDetails();
-  if (!/^[0-9]{10}$/.test(details.phone)) {
-    alert("Please enter a valid 10-digit mobile number.");
+  if (!/^[6-9][0-9]{9}$/.test(details.phone) && !/^[0-9]{10}$/.test(details.phone)) {
+    whatsappInput.classList.add("input-error", "shake");
+    setTimeout(() => whatsappInput.classList.remove("shake"), 400);
+    whatsappInput.focus();
+    setAlert(formAlert, "error", "Please enter a valid 10-digit WhatsApp mobile number.");
     return;
   }
+
+  saveDraftForm();
   showScreen("payment");
 });
 
@@ -1605,10 +1882,7 @@ paymentCheckbox.addEventListener("change", function () {
 });
 
 continueBooking.addEventListener("click", function () {
-  if (!paymentCheckbox.checked) {
-    alert("Please complete the payment declaration first.");
-    return;
-  }
+  if (!paymentCheckbox.checked) return;
 
   const d = getDetails();
   document.getElementById("summaryCode").textContent = d.code;
@@ -1626,13 +1900,8 @@ document.getElementById("backDetails").addEventListener("click", () => showScree
 document.getElementById("backPayment").addEventListener("click", () => showScreen("payment"));
 
 // WHATSAPP URL GENERATOR & MODAL OPENER
-const openWhatsAppLink = document.getElementById("openWhatsApp");
-const copyMsgBtn = document.getElementById("copyMsgBtn");
-const copyStatus = document.getElementById("copyStatus");
-
 document.getElementById("sendWhatsApp").addEventListener("click", function () {
   if (!paymentCheckbox.checked) {
-    alert("Please confirm payment first.");
     showScreen("payment");
     return;
   }
@@ -1666,7 +1935,7 @@ Please review our registration and confirm the team slot after payment verificat
   const finalUrl = "https://api.whatsapp.com/send?phone=" + ADMIN_WHATSAPP + "&text=" + encodeURIComponent(generatedWhatsappMessage);
   openWhatsAppLink.setAttribute("href", finalUrl);
   copyStatus.textContent = "";
-  document.getElementById("successModal").classList.add("active");
+  successModal.classList.add("active");
 });
 
 copyMsgBtn.addEventListener("click", async function () {
@@ -1686,20 +1955,28 @@ copyMsgBtn.addEventListener("click", async function () {
 });
 
 document.getElementById("closeModal").addEventListener("click", () => {
-  document.getElementById("successModal").classList.remove("active");
+  successModal.classList.remove("active");
 });
 
-const slotList = document.getElementById("slotList");
-const slotCount = document.getElementById("slotCount");
-const slotMessage = document.getElementById("slotMessage");
-const capacityBadge = document.getElementById("capacityBadge");
+successModal.addEventListener("click", (e) => {
+  if (e.target === successModal) {
+    successModal.classList.remove("active");
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && successModal.classList.contains("active")) {
+    successModal.classList.remove("active");
+  }
+});
 
 function renderSlots(items) {
   const byNumber = new Map();
   (Array.isArray(items) ? items : []).forEach(item => {
-    const n = Number(item.slot ?? item.Slot);
+    const rawSlot = String(item.slot ?? "").replace(/\D/g, "");
+    const n = Number(rawSlot);
     if (n >= 1 && n <= 25) {
-      byNumber.set(n, String(item.teamName ?? item.team ?? item["Team Name"] ?? "").trim());
+      byNumber.set(n, String(item.teamName ?? "").trim());
     }
   });
 
@@ -1741,54 +2018,82 @@ function renderSlots(items) {
   const available = 25 - booked;
   capacityBadge.textContent = available + " Vacant / 25 Total";
   slotCount.textContent = booked + " / 25 ALLOTTED";
-  slotMessage.textContent = "Official register updated. Final slot confirmation is issued by the admin after fee verification.";
+  slotMessage.textContent = "Official register synced. Final slot confirmation is issued by the admin after fee verification.";
 }
 
 function parseSlotCSV(text) {
-  const lines = text.split("\n");
+  const rows = parseCSVRows(text);
   const result = [];
-  if (lines.length === 0) return result;
+  if (rows.length === 0) return result;
 
-  const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
+  const headers = rows[0].map(h => h.toLowerCase());
+  const slotIdx = headers.findIndex(h => h.includes("slot"));
+  const teamIdx = headers.findIndex(h => h.includes("team") || h.includes("squad") || h.includes("name"));
 
-  for (let i = 1; i < lines.length; i++) {
-    if (!lines[i].trim()) continue;
-    const currentline = lines[i].split(",");
-    const obj = {};
-    for (let j = 0; j < headers.length; j++) {
-      obj[headers[j]] = currentline[j] ? currentline[j].trim().replace(/^"|"$/g, "") : "";
-    }
+  for (let i = 1; i < rows.length; i++) {
+    const cols = rows[i];
+    if (!cols || cols.length === 0) continue;
+
+    const slotVal = slotIdx !== -1 ? cols[slotIdx] : (cols[0] || i);
+    const teamVal = teamIdx !== -1 ? cols[teamIdx] : (cols[1] || "");
+
     result.push({
-      slot: obj["Slot"] || i,
-      teamName: obj["Team Name"] || ""
+      slot: slotVal || i,
+      teamName: teamVal || ""
     });
   }
   return result;
 }
 
 async function loadSlots() {
+  if (isFetchingSlots) return;
+  isFetchingSlots = true;
+
   slotMessage.textContent = "Connecting to official Google Sheets register...";
-  slotCount.textContent = "Loading...";
+  slotCount.textContent = "Syncing...";
+  refreshIcon.classList.add("spin-icon");
+  refreshSlotsBtn.disabled = true;
+  refreshBtnText.textContent = "SYNCING REGISTER...";
 
   try {
-    const response = await fetch(SLOT_API_URL, { cache: "no-store" });
+    const url = SLOT_API_URL + "&_t=" + Date.now();
+    const response = await fetch(url, { cache: "no-store" });
     if (!response.ok) throw new Error("HTTP " + response.status);
     const csvText = await response.text();
     const slotsData = parseSlotCSV(csvText);
     renderSlots(slotsData);
   } catch (error) {
     slotList.innerHTML = "";
-    slotCount.textContent = "Error";
+    slotCount.textContent = "Offline";
     slotMessage.textContent = "Slots load nahi ho paaye. Kripya check karein ki Google Sheet 'Anyone with the link can view' par set ho.";
+  } finally {
+    isFetchingSlots = false;
+    refreshIcon.classList.remove("spin-icon");
+    refreshSlotsBtn.disabled = false;
+    refreshBtnText.textContent = "REFRESH REGISTER";
   }
 }
 
-document.getElementById("openSlots").addEventListener("click", () => {
-  showScreen("slots");
-  loadSlots();
+openSlotsBtn.addEventListener("click", () => {
+  const isCurrentlySlots = screens.slots.classList.contains("active");
+  if (isCurrentlySlots) {
+    showScreen(lastFormScreen || "details");
+  } else {
+    showScreen("slots");
+    loadSlots();
+  }
 });
-document.getElementById("refreshSlots").addEventListener("click", loadSlots);
-document.getElementById("backFromSlots").addEventListener("click", () => showScreen("details"));
+
+refreshSlotsBtn.addEventListener("click", loadSlots);
+document.getElementById("backFromSlots").addEventListener("click", () => {
+  showScreen(lastFormScreen || "details");
+});
+
+// RESTORE SESSION SAFELY AFTER ALL VARIABLES ARE INITIALIZED
+const savedCode = sessionStorage.getItem("dj_verified_code");
+if (savedCode) {
+  unlockPortal(savedCode);
+}
 </script>
 
 </body>
